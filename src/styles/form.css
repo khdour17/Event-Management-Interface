@@ -1,0 +1,28 @@
+header {
+    margin-bottom: 30px;
+}
+
+#event-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+#event-form input,
+#event-form textarea {
+    padding: 10px;
+    border: none;
+    border-radius: 6px;
+    font: inherit;
+}
+
+#event-form textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+.button-group {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+}

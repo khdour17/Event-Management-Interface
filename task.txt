@@ -1,0 +1,19 @@
+BTW, here is your 2nd task to be implement in TS:
+
+Design and implement an event management interface that allows users to view a list of events, create new events, and edit existing ones.
+will have 2 pages:
+
+1- Main Page (Events List), contain the following:
+   - Header, contain title, Add event
+
+   - Event cards -> list of cards displayed under header, each card has following: name, date and 
+            card color according to status red-> past, today-> green, future-> blue ... 
+            click on card should move to create/edit view with ability to edit it
+   
+   - header add event -> move to create/edit view to add new event
+
+2- Create/Edit event:
+     - header -> title (Create/Edit Event)
+     - form to add/edit event -> name, description, date
+     - Save/Add button -> label according to action -> after save return to main page
+     - Cancel button -> discard changes and back to event list
