@@ -8,6 +8,7 @@ const eventsList = document.getElementById('event-list') as HTMLUListElement;
 /**
  * ENTRY POINT
  */
+
 export function initEventsPage(): void {
     const events = getEvents();
     
@@ -18,6 +19,7 @@ export function initEventsPage(): void {
 /**
  * RENDER LIST
  */
+
 function renderEvents(events: Event[]): void {
     eventsList.innerHTML = ""; // Clear existing events
     if (events.length === 0) {
@@ -26,38 +28,84 @@ function renderEvents(events: Event[]): void {
     }
     const sortedEvents = [...events].sort((a, b) => a.date.getTime() - b.date.getTime());
     sortedEvents.forEach(event => {
-        const card = createEventCard(event);
-        eventsList.appendChild(card);
+        const eventItem = createEventCard(event);
+        eventsList.appendChild(eventItem);
     });
 }
 
 /**
  * CREATE CARD
  */
-function createEventCard(event: Event): HTMLElement {
-    const card = document.createElement("li");
-    card.classList.add("event-card");
 
-    const name = document.createElement("span");
+function createEventCard(event: Event): HTMLElement {
+
+    const eventItem = document.createElement("li");
+    eventItem.classList.add("event-item");
+
+    const card = document.createElement("article");
+    card.classList.add("event-card");
+    card.classList.add(`event-${getEventStatus(event.date)}`);
+
+    const { header, headerContent } = createEventHeader(event);
+
+    const divider = document.createElement("div");
+    divider.classList.add("event-divider");
+
+    const description = document.createElement("p");
+    description.classList.add("event-description");
+    description.textContent = event.description;
+
+    const deleteButton = createDeleteButton(event);
+
+    header.append(
+        headerContent,
+        deleteButton
+    );
+
+    card.append(
+        header,
+        divider,
+        description
+    );
+
+
+    eventItem.append(
+        card
+    );
+
+    card.addEventListener("click", () => {
+        goToEditEvent(event.id);
+    });
+
+    return eventItem;
+}
+
+/**
+ * CREATE EVENT CARD HEADER
+ */
+
+function createEventHeader(event: Event) {
+    const header = document.createElement("div");
+    header.classList.add("event-header");
+
+    const headerContent = document.createElement("div");
+    headerContent.classList.add("event-header-content");
+
+    const name = document.createElement("h2");
+    name.classList.add("event-name");
     name.textContent = event.name;
 
-    const desc = document.createElement("span");
-    desc.textContent = event.description;
-
     const date = document.createElement("span");
+    date.classList.add("event-date");
     date.textContent = formatDate(event.date);
 
-    const deleteBtn = createDeleteButton(event);
-
-    const status = getEventStatus(event.date);
-    card.classList.add(`event-${status}`);
-
-    card.append(name, desc, date, deleteBtn);
-
-    card.addEventListener("click", () => goToEditEvent(event.id));
-
-    return card;
+    headerContent.append(name, date);
+    return { header, headerContent };
 }
+
+/** 
+ * CREATE DELETE BUTTON
+ */
 
 function createDeleteButton(event: Event) {
     const deleteBtn = document.createElement("button");
@@ -75,6 +123,7 @@ function createDeleteButton(event: Event) {
 /**
  * ADD EVENT
  */
+
 function goToCreateEvent(): void {
     window.location.assign("event.html");
 }
@@ -82,6 +131,7 @@ function goToCreateEvent(): void {
 /**
  * EDIT EVENT
  */
+
 function goToEditEvent(eventId: number): void {
     window.location.assign(`event.html?id=${eventId}`);
 }
@@ -89,6 +139,7 @@ function goToEditEvent(eventId: number): void {
 /** 
  * EMPTY STATE
  */
+
 function updateEmptyState(): void {
     const emptyMessage = document.createElement("p");
     emptyMessage.textContent = "No events available. Click 'Add Event' to create one.";
@@ -98,6 +149,7 @@ function updateEmptyState(): void {
 /**
  * LISTENERS
  */
+
 function attachEventListeners(): void {
     addEventButton?.addEventListener("click", goToCreateEvent);
 }

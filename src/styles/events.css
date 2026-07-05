@@ -1,24 +1,159 @@
-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+/* ======================================================
+   ACTION BUTTON
+====================================================== */
 
-    margin-bottom: 30px;
+#add-event-button {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #2563eb;
+    color: white;
+    padding: 14px 24px;
+    font-size: 16px;
+    font-weight: 600;
 }
+
+#add-event-button:hover {
+    background: #3076e8;
+}
+
+
+/* ======================================================
+   EVENTS LIST
+====================================================== */
 
 #event-list {
     list-style: none;
-
     display: flex;
     flex-direction: column;
-
     gap: 20px;
 }
 
-/* Placeholder until cards are created */
+
+/* ======================================================
+   EVENT ITEM
+====================================================== */
+
+.event-item {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
 
 .event-card {
-    background: white;
-    padding: 20px;
-    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    padding: 14px 22px;
+    border-radius: 16px;
+    color: white;
+    cursor: pointer;
+    transition: transform .25s, box-shadow .25s;
+    box-shadow: 0 10px 22px rgba(0,0,0,.18);
+}
+
+.event-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 30px rgba(0,0,0,.24);
+}
+
+
+/* ======================================================
+   STATUS COLORS
+====================================================== */
+
+.event-past {
+    background: linear-gradient(135deg, #991b1b, #7f1d1d);
+}
+
+.event-today {
+    background: linear-gradient(135deg, #15803d, #166534);
+}
+
+.event-future {
+    background: linear-gradient(135deg, #2563eb, #1d4ed8);
+}
+
+
+/* ======================================================
+   CARD CONTENT
+====================================================== */
+
+.event-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 16px;
+}
+
+.event-header-content {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 0;
+}
+
+.event-name {
+    font-size: 1.25rem;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.event-date {
+    font-size: .9rem;
+    opacity: .9;
+    white-space: nowrap;
+}
+
+.event-divider {
+    width: 100%;
+    height: 1px;
+    background: rgba(255,255,255,.25);
+}
+
+.event-description {
+    font-size: .95rem;
+    line-height: 1.5;
+    opacity: .95;
+}
+
+
+/* ======================================================
+   DELETE BUTTON
+====================================================== */
+
+.delete-button {
+    width: 42px;
+    height: 42px;
+    margin-left: auto;
+    border-radius: 50%;
+    background: rgba(255,255,255,.18);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    flex-shrink: 0;
+    transition: background .2s, transform .2s;
+}
+
+.delete-button:hover {
+    background: rgba(255,255,255,.28);
+    transform: translateY(-2px);
+}
+
+
+/* ======================================================
+   EMPTY STATE
+====================================================== */
+
+#event-list p {
+    background: #334155;
+    color: white;
+    padding: 48px;
+    border-radius: 16px;
+    text-align: center;
+    font-size: 1.1rem;
+    font-weight: 500;
 }

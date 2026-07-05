@@ -1,3 +1,7 @@
+/**
+ * Event model interface
+ */
+
 export interface Event {
     id: number;
     name: string;
@@ -8,6 +12,7 @@ export interface Event {
 /**
  * STATUS VALUES
  */
+
 export const EventStatus = {
     PAST: "past",
     TODAY: "today",

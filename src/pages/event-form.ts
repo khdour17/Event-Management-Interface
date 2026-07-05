@@ -16,6 +16,7 @@ let currentEventId: number | null = null;
 /**
  * ENTRY POINT
  */
+
 export function initEventFormPage(): void {
     currentMode = getFormMode();
 
@@ -40,6 +41,7 @@ export function initEventFormPage(): void {
 /**
  * MODE
  */
+
 function getFormMode(): "create" | "edit" {
     const params = new URLSearchParams(window.location.search);
     return params.get("id") ? "edit" : "create";
@@ -48,6 +50,7 @@ function getFormMode(): "create" | "edit" {
 /**
  * GET ID FROM URL
  */
+
 function getEventId(): number | null {
     const params = new URLSearchParams(window.location.search);
     const id = params.get("id");
@@ -57,6 +60,7 @@ function getEventId(): number | null {
 /**
  * POPULATE FORM
  */
+
 function populateForm(event: Event): void {
     eventNameInput.value = event.name;
     eventDescriptionInput.value = event.description;
@@ -66,6 +70,7 @@ function populateForm(event: Event): void {
 /**
  * READ FORM
  */
+
 function getFormData(): Event {
     return {
         id: 0, // Placeholder, will be set later
@@ -78,6 +83,7 @@ function getFormData(): Event {
 /**
  * SAVE
  */
+
 function saveEvent(): void {
     const data = getFormData();
 
@@ -97,15 +103,21 @@ function saveEvent(): void {
 /**
  * LISTENERS
  */
+
 function attachEventListeners(): void {
     saveButton?.addEventListener("click", saveEvent);
 
     cancelButton?.addEventListener("click", goToEventsPage);
+
+    eventDateInput?.addEventListener("click", () => {
+        eventDateInput?.showPicker();
+    });
 }
 
 /**
  * NAVIGATION
  */
+
 function goToEventsPage(): void {
     window.location.assign("index.html");
 }
@@ -113,6 +125,7 @@ function goToEventsPage(): void {
 /**
  * UPDATE BUTTON TEXT 
  */
+
 function updateButtonText(): void {
     if (currentMode === "create") {
         saveButton.textContent = "Create Event";
@@ -124,6 +137,7 @@ function updateButtonText(): void {
 /**
  * UPDATE HEADER TEXT 
  */
+
 function updateHeaderText(): void {
     if (currentMode === "create") {
         formTitle.textContent = "Create Event";
