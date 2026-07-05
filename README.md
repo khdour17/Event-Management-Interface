@@ -17,6 +17,7 @@ It allows users to create, view, edit, and delete events in a clean two-page int
   - Future (blue)
 - Sorted event list by date
 - Empty state handling
+- Persistent storage using localStorage
 - Clean modular TypeScript structure
 
 ---
@@ -134,8 +135,22 @@ npm run dev
 
 # 🧠 Key Design Decisions
 
+## Data Persistence
+This project now uses localStorage to persist events.
+
+What this means:
+- Events are saved in the browser
+- Data stays after refresh
+- Data stays after closing/reopening browser
+- No backend database is used
+  
+Storage behavior:
+- Every add/edit/delete updates localStorage
+- On page load, data is loaded from localStorage first
+- If no data exists → fallback to empty list
+
 ## No backend / no database
-Data is stored in-memory using a TypeScript store module.
+Data is stored in-browser using localStorage.
 
 ## Modular architecture
 - models → types
@@ -162,7 +177,6 @@ Data is stored in-memory using a TypeScript store module.
 
 # ⚠️ Notes
 
-- No persistence (refresh resets data)
 - Must run using Vite (not file open)
 
 ---
